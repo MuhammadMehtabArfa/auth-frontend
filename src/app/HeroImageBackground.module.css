@@ -1,0 +1,91 @@
+.wrapper {
+    position: relative;
+    padding-top: 180px;
+    padding-bottom: 130px;
+    background-image: url(https://cdn.prod.website-files.com/61845f7929f5aa517ebab941/63a06f726c26c8dda5deba70_The%20Battle%20of%20Authentication-%20Which%20Type%20Is%20Most%20Secure-p-1080.jpg);
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .inner {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .title {
+    font-weight: 800;
+    font-size: 40px;
+    letter-spacing: -1px;
+    padding-left: var(--mantine-spacing-md);
+    padding-right: var(--mantine-spacing-md);
+    color: var(--mantine-color-white);
+    margin-bottom: var(--mantine-spacing-xs);
+    text-align: center;
+    font-family:
+      Greycliff CF,
+      var(--mantine-font-family);
+  }
+  
+  /* Media Query for smaller screens (Mobile/Tablet) */
+  @media (max-width: 640px) {
+    .wrapper {
+      padding-top: 80px;
+      padding-bottom: 50px;
+    }
+  
+    .title {
+      font-size: 28px;
+      text-align: left;
+    }
+  
+    .description {
+      font-size: var(--mantine-font-size-md);
+      text-align: left;
+    }
+  
+    .controls {
+      flex-direction: column;
+    }
+  
+    .control {
+      margin-top: var(--mantine-spacing-md);
+      margin-left: 0;
+    }
+  
+    .secondaryControl {
+      margin-top: var(--mantine-spacing-md);
+      margin-left: 0;
+    }
+  }
+  
+  .description {
+    color: var(--mantine-color-gray-0);
+    text-align: center;
+  }
+  
+  .controls {
+    margin-top: calc(var(--mantine-spacing-xl) * 1.5);
+    display: flex;
+    justify-content: center;
+    padding-left: var(--mantine-spacing-md);
+    padding-right: var(--mantine-spacing-md);
+  }
+  
+  .control {
+    height: 42px;
+    font-size: var(--mantine-font-size-md);
+  
+    &:not(:first-of-type) {
+      margin-left: var(--mantine-spacing-md);
+    }
+  }
+  
+  .secondaryControl {
+    color: var(--mantine-color-white);
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .secondaryControl:hover {
+    background-color: rgba(255, 255, 255, 0.45);
+  }
+  
