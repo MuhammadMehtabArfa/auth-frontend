@@ -35,9 +35,9 @@ const login = () => {
                     <PasswordInput label="Password" placeholder="Your password" required mt="md" />
                     <Group justify="space-between" mt="lg">
                         <Checkbox label="Remember me" />
-                        <Anchor component="button" size="sm">
+                       <Link href={'/forgotpassword'}><Anchor component="button" size="sm">
                             Forgot password?
-                        </Anchor>
+                        </Anchor></Link> 
                     </Group>
                     <Button fullWidth mt="xl">
                         Sign in

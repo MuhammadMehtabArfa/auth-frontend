@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import {  QueryClient,QueryClientProvider} from "@tanstack/react-query"
 import {
   ColorSchemeScript,
   createTheme,
@@ -10,6 +11,7 @@ import localFont from "next/font/local";
 import Head from "next/head";
 import "./globals.css";
 import { breakpoints, colors } from "./theme";
+const queryClient = new  QueryClient();
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -48,7 +50,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </Head>
       <body className="antialiased">
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme}><QueryClientProvider client={queryClient}>{children}</QueryClientProvider></MantineProvider>
       </body>
     </html>
   );
