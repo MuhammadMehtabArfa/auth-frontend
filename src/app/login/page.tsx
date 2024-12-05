@@ -1,5 +1,5 @@
-'use client'
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 
 import {
   Anchor,
@@ -12,18 +12,19 @@ import {
   Text,
   TextInput,
   Title,
-} from '@mantine/core';
-import Link from 'next/link';
-import classes from './AuthenticationTitle.module.css';
-import uselogin from '@/hooks/auth/uselogin';
+} from "@mantine/core";
+import Link from "next/link";
+import classes from "./AuthenticationTitle.module.css";
+import uselogin from "@/hooks/auth/uselogin";
 
 const Login = () => {
-  const { register,
+  const {
+    register,
     handleSubmit,
     onSubmit,
-    loginMutation } = uselogin();
-
-
+    loginMutation,
+    formState: { errors },
+  } = uselogin();
 
   return (
     <div>
@@ -32,7 +33,7 @@ const Login = () => {
           Welcome back!
         </Title>
         <Text c="dimmed" size="sm" ta="center" mt={5}>
-          Do not have an account yet?{' '}
+          Do not have an account yet?{" "}
           <Link href="/signup" passHref>
             <Anchor size="sm" component="button">
               Create account
@@ -50,6 +51,11 @@ const Login = () => {
               {...register("email")}
               required
             />
+            {errors.email && (
+              <span className="text-red-500 text-xs">
+                {errors.email.message}
+              </span>
+            )}
             <PasswordInput
               label="Password"
               placeholder="Your password"
@@ -58,6 +64,11 @@ const Login = () => {
               required
               mt="md"
             />
+            {errors.password && (
+              <span className="text-red-500 text-xs">
+                {errors.password.message}
+              </span>
+            )}
             <Group align="center" mt="lg">
               <Checkbox label="Remember me" />
               <Link href="/forgotpassword" passHref>
@@ -66,12 +77,10 @@ const Login = () => {
                 </Anchor>
               </Link>
             </Group>
-            <Button type='submit' fullWidth mt="xl">
+            <Button type="submit" fullWidth mt="xl">
               Login
             </Button>
           </form>
-
-
         </Paper>
       </Container>
     </div>
