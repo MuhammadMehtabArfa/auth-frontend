@@ -21,11 +21,11 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { register,
-        handleSubmit,
-        onSubmit,
-        loginMutation} = uselogin();
+    handleSubmit,
+    onSubmit,
+    loginMutation } = uselogin();
 
-  
+
 
   return (
     <div>
@@ -44,36 +44,36 @@ const Login = () => {
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">
           <form onSubmit={handleSubmit(onSubmit)}>
-             <TextInput
-            type="email"
-            label="Email"
-            placeholder="abc@gmail.com"
-                disabled={loginMutation?.isPending}
-             {...register("email")}
-            required
-          />
-          <PasswordInput
-            label="Password"
-            placeholder="Your password"
-             disabled={loginMutation?.isPending}
-                            {...register("password")}
-            required
-            mt="md"
-          />
-         <Group  align="center" mt="lg">
-            <Checkbox label="Remember me" />
-            <Link href="/forgotpassword" passHref>
-              <Anchor component="button" size="sm">
-                Forgot password?
-              </Anchor>
-            </Link>
-          </Group>
-          <Button fullWidth   mt="xl">
-           Login
-          </Button>
+            <TextInput
+              type="email"
+              label="Email"
+              placeholder="abc@gmail.com"
+              disabled={loginMutation?.isPending}
+              {...register("email")}
+              required
+            />
+            <PasswordInput
+              label="Password"
+              placeholder="Your password"
+              disabled={loginMutation?.isPending}
+              {...register("password")}
+              required
+              mt="md"
+            />
+            <Group align="center" mt="lg">
+              <Checkbox label="Remember me" />
+              <Link href="/forgotpassword" passHref>
+                <Anchor component="button" size="sm">
+                  Forgot password?
+                </Anchor>
+              </Link>
+            </Group>
+            <Button fullWidth mt="xl">
+              Login
+            </Button>
           </form>
-         
-         
+
+
         </Paper>
       </Container>
     </div>
