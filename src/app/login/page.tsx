@@ -16,10 +16,8 @@ import {
 import Link from 'next/link';
 import classes from './AuthenticationTitle.module.css';
 import uselogin from '@/hooks/auth/uselogin';
-import { Form } from 'react-hook-form';
+
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const { register,
     handleSubmit,
     onSubmit,
@@ -68,7 +66,7 @@ const Login = () => {
                 </Anchor>
               </Link>
             </Group>
-            <Button fullWidth mt="xl">
+            <Button type='submit' fullWidth mt="xl">
               Login
             </Button>
           </form>

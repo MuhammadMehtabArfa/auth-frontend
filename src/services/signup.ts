@@ -1,13 +1,13 @@
-// import apiClient from "@/middleware/axios";
+import apiClient from "@/middleware/axios";
 
-// export type SignUpParams = {
-//   email: string;
-//   password: string;
-//   name: string; 
-// };
+export type SignUpParams = {
+    email: string;
+    username: string;
+    password: string;
+};
 
-// export const useSignUp = {
-//   async signUp(signUpData: SignUpParams) {
-//     return await apiClient.post(`auth/signup`, signUpData);
-//   }
-// };
+export const signupUser = {
+    async signUp(signUpData: SignUpParams) {
+        return await apiClient.post(`sign-up`, signUpData);
+    }
+};
