@@ -1,6 +1,11 @@
+"use client"
 import * as React from 'react';
 import { Input as BaseInput } from '@mui/base/Input';
 import { Box, styled } from '@mui/system';
+import { UseFormRegisterReturn } from 'react-hook-form';// mui
+
+
+
 
 function OTP({
     separator,
@@ -171,13 +176,18 @@ function OTP({
         </Box>
     );
 }
+interface OTPInputProps {
+    register: UseFormRegisterReturn;
 
-export default function OTPInput() {
+}
+
+export default function OTPInput({ register }: OTPInputProps) {
+
     const [otp, setOtp] = React.useState('');
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <OTP separator={<span>-</span>} value={otp} onChange={setOtp} length={4} />
+            <OTP {...register} separator={<span>-</span>} value={otp} onChange={setOtp} length={4} />
             <span>Entered value: {otp}</span>
         </Box>
     );

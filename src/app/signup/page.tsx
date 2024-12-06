@@ -10,8 +10,9 @@ import {
 import classes from "./AuthenticationTitle.module.css";
 import React from "react";
 import useSignUp from "@/hooks/auth/usesignup";
-
+import { useRouter } from "next/navigation";
 const signup = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -21,6 +22,16 @@ const signup = () => {
   } = useSignUp();
   //just imported the errors messga eand display it if it is not submitting it will show yoy the reason
   // and on signup button add type submit it starts working
+  const handleSignup = async (data: any) => {
+    try {
+      await onSubmit(data); // Call your existing onSubmit logic
+      await router.push("/verifyotp"); // Navigate to Verify OTP page on success
+    } catch (error) {
+      console.error("Signup failed:", error);
+    }
+  };
+
+
   return (
     <div>
       <Container size={420} my={40}>
@@ -29,7 +40,7 @@ const signup = () => {
         </Title>
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(handleSignup)}>
             {" "}
             <TextInput
               label="Email"

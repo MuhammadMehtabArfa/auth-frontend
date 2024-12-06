@@ -9,6 +9,6 @@ export type LoginParams = {
 
 export const loginUser = {
   async login(loginData: LoginParams) {
-    return await apiClient.post(`login`, loginData);
+    return await apiClient.post(`api/login`, loginData);
   }
 };

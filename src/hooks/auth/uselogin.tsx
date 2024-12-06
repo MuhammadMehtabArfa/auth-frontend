@@ -43,24 +43,6 @@ const uselogin = () => {
     mutationFn: loginUser.login,
     onSuccess: (data: any) => {
       console.log(data);
-      // if (data?.isVerified === false) {
-      //     const email = getValues('email');
-      //     const verify = format({
-      //         pathname: ("/otp"),
-      //         query: { email }
-      //     });
-      //     router.push(verify);
-      // setLoggedIn({
-      //              userDetails: data?.user,
-      //              accessToken: data?.accessToken, });
-      // }
-      // else {
-
-      //     setLoggedIn({
-      //         userDetails: data?.user,
-      //         accessToken: data?.accessToken,
-      //     });
-      // }
     },
     onError: (error: any) => {
       console.log({ error });

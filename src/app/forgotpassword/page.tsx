@@ -14,8 +14,16 @@ import {
 import classes from './AuthenticationTitle.module.css';
 import React from 'react'
 import Link from 'next/link';
+import useforgotPassword from '@/hooks/auth/useforgot';
 
 const forgotpassword = () => {
+  const {
+    register,
+    handleSubmit,
+    onSubmit,
+    forgotPasswordMutation,
+    formState: { errors },
+  } = useforgotPassword()
   return (
     <div>
       <Container size={420} my={40}>
@@ -24,13 +32,18 @@ const forgotpassword = () => {
         </Title>
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <TextInput label="Email" placeholder="abc@gmail.com" required />
+          <form action="" onSubmit={handleSubmit(onSubmit)}><TextInput disabled={forgotPasswordMutation?.isPending} {...register("email")} label="Email" placeholder="abc@gmail.com" required />
+            {errors.email && (
+              <span className="text-red-500 text-xs">
+                {errors.email.message}
+              </span>
+            )}
 
+            <Button type='submit' fullWidth mt="xl">
+              Send OTP
 
-          <Link href={'/verifyotp'}> <Button fullWidth mt="xl">
-            Send OTP
+            </Button></form>
 
-          </Button></Link>
         </Paper>
       </Container>
     </div>

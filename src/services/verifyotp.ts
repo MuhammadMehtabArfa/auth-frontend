@@ -1,12 +1,12 @@
-// import apiClient from "@/middleware/axios";
+import apiClient from "@/middleware/axios";
 
-// export type VerifyOtpParams = {
-//   email: string;
-//   otp: string;
-// };
+export type VerifyOtpParams = {
+    email: string;
+    otp: string;
+};
 
-// export const useVerifyOtp = {
-//   async verifyOtp(verifyOtpData: VerifyOtpParams) {
-//     return await apiClient.post(`auth/verify-otp`, verifyOtpData);
-//   }
-// };
+export const verifyotpUser = {
+    async verifyOtp(verifyOtpData: VerifyOtpParams) {
+        return await apiClient.post(`api/verify-otp`, verifyOtpData);
+    }
+};

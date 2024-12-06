@@ -27,7 +27,7 @@ const useSignUp = () => {
             .matches(/[A-Z]+/, "Password must contain at least one uppercase letter")
             .matches(/[@$!%*#?&]+/, "Password must contain at least one special character")
             .matches(/\d+/, "Password must contain at least one number"),
-            username: yup.string().required("Username is required"),
+        username: yup.string().required("Username is required"),
 
     });
 

@@ -8,6 +8,6 @@ export type SignUpParams = {
 
 export const signupUser = {
     async signUp(signUpData: SignUpParams) {
-        return await apiClient.post(`sign-up`, signUpData);
+        return await apiClient.post(`api/sign-up`, signUpData);
     }
 };

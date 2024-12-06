@@ -1,10 +1,11 @@
-// import apiClient from "@/middleware/axios";
-// export type LoginParams = {
-//   email: string;
-//   password: string;
-// }
-// export const useForgotPassword = {
-//   async login(loginData: LoginParams) {
-//     return await apiClient.post(`auth/login`, loginData);
-//   }
-// };
+import apiClient from "@/middleware/axios";
+export type FPParams = {
+    email: string;
+
+
+}
+export const forgotpasswordUser = {
+    async forgotpassword(FPData: FPParams) {
+        return await apiClient.post(`api/forgot-password`, FPData);
+    }
+};
