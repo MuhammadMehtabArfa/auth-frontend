@@ -20,17 +20,6 @@ const signup = () => {
     signupMutation,
     formState: { errors },
   } = useSignUp();
-  //just imported the errors messga eand display it if it is not submitting it will show yoy the reason
-  // and on signup button add type submit it starts working
-  const handleSignup = async (data: any) => {
-    try {
-      await onSubmit(data); // Call your existing onSubmit logic
-      await router.push("/verifyotp"); // Navigate to Verify OTP page on success
-    } catch (error) {
-      console.error("Signup failed:", error);
-    }
-  };
-
 
   return (
     <div>
@@ -40,7 +29,7 @@ const signup = () => {
         </Title>
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <form onSubmit={handleSubmit(handleSignup)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             {" "}
             <TextInput
               label="Email"
@@ -59,6 +48,7 @@ const signup = () => {
               placeholder="Repeat Password"
               required
               mt="md"
+              disabled={signupMutation?.isPending}
               {...register("username")}
             />
             {errors.username && (
@@ -79,8 +69,13 @@ const signup = () => {
                 {errors.password.message}
               </span>
             )}
-            <Button type="submit" fullWidth mt="xl">
-              Sign up
+            <Button
+              type="submit"
+              fullWidth
+              mt="xl"
+              disabled={signupMutation?.isPending}
+            >
+              {signupMutation?.isPending ? "...Loading" : "Sign up"}
             </Button>
           </form>
         </Paper>

@@ -4,90 +4,100 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { signupUser } from "@/services/signup";
-
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const useSignUp = () => {
-    const [signupMutationError, setsignupMutationError] = useState<string | null>(null);
-    // const { setLoggedIn } = useAccount();
+  const router = useRouter();
+  const [signupMutationError, setsignupMutationError] = useState<string | null>(
+    null,
+  );
+  // const { setLoggedIn } = useAccount();
 
-    const signupSchema = yup.object().shape({
-        email: yup.string()
-            .email('Invalid email address')
-            .required('Email is required')
-            .test('valid-domain', 'Email must contain a domain', (value) => {
-                return /@.+\./.test(value);
-            }),
-        password: yup
-            .string()
-            .required("Password is required")
-            .typeError("")
-            .min(8, "Password must be at least 8 characters")
-            .max(20, "Password must be at most 20 characters")
-            .matches(/[a-z]+/, "Password must contain at least one lowercase letter")
-            .matches(/[A-Z]+/, "Password must contain at least one uppercase letter")
-            .matches(/[@$!%*#?&]+/, "Password must contain at least one special character")
-            .matches(/\d+/, "Password must contain at least one number"),
-        username: yup.string().required("Username is required"),
+  const signupSchema = yup.object().shape({
+    email: yup
+      .string()
+      .email("Invalid email address")
+      .required("Email is required")
+      .test("valid-domain", "Email must contain a domain", (value) => {
+        return /@.+\./.test(value);
+      }),
+    password: yup
+      .string()
+      .required("Password is required")
+      .typeError("")
+      .min(8, "Password must be at least 8 characters")
+      .max(20, "Password must be at most 20 characters")
+      .matches(/[a-z]+/, "Password must contain at least one lowercase letter")
+      .matches(/[A-Z]+/, "Password must contain at least one uppercase letter")
+      .matches(
+        /[@$!%*#?&]+/,
+        "Password must contain at least one special character",
+      )
+      .matches(/\d+/, "Password must contain at least one number"),
+    username: yup.string().required("Username is required"),
+  });
 
-    });
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState,
+    formState: { errors, touchedFields },
+  } = useForm({
+    resolver: yupResolver(signupSchema),
+    mode: "onBlur",
+  });
 
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        formState,
-        formState: { errors, touchedFields },
-    } = useForm({
-        resolver: yupResolver(signupSchema),
-        mode: "onBlur",
-    });
+  const onSubmit = (data: any) => {
+    signupMutation.mutate(data);
+    console.log(data);
+  };
 
-    const onSubmit = (data: any) => {
-        signupMutation.mutate(data);
-        console.log(data)
-    };
+  const signupMutation = useMutation({
+    mutationFn: signupUser.signUp,
+    onSuccess: (data: any) => {
+      console.log("signup", data);
+      toast.success(data?.data?.message);
+      router.push(`/verifyotp?email=${data?.data?.user?.email}`);
+      // if (data?.isVerified === false) {
+      //     const email = getValues('email');
+      //     const verify = format({
+      //         pathname: ("/otp"),
+      //         query: { email }
+      //     });
+      //     router.push(verify);
+      // setLoggedIn({
+      //              userDetails: data?.user,
+      //              accessToken: data?.accessToken, });
+      // }
+      // else {
 
-    const signupMutation = useMutation({
-        mutationFn: signupUser.signUp,
-        onSuccess: (data: any) => {
-            console.log(data)
-            // if (data?.isVerified === false) {
-            //     const email = getValues('email');
-            //     const verify = format({
-            //         pathname: ("/otp"),
-            //         query: { email }
-            //     });
-            //     router.push(verify);
-            // setLoggedIn({
-            //              userDetails: data?.user,
-            //              accessToken: data?.accessToken, });
-            // }
-            // else {
+      //     setLoggedIn({
+      //         userDetails: data?.user,
+      //         accessToken: data?.accessToken,
+      //     });
+      // }
+    },
+    onError: (error: any) => {
+      console.log("error in signup", error);
+      setsignupMutationError(error?.data?.error?.detail);
+      toast.error(
+        error?.response?.data?.message || error?.response?.data?.errors,
+      );
+    },
+  });
 
-            //     setLoggedIn({
-            //         userDetails: data?.user,
-            //         accessToken: data?.accessToken,
-            //     });
-            // }
-
-        },
-        onError: (error: any) => {
-            console.log({ error })
-            setsignupMutationError(error?.data?.error?.detail);
-
-        },
-    });
-
-    return {
-        signupMutationError,
-        signupMutation,
-        register,
-        handleSubmit,
-        errors,
-        onSubmit,
-        setValue,
-        touchedFields,
-        formState
-    };
+  return {
+    signupMutationError,
+    signupMutation,
+    register,
+    handleSubmit,
+    errors,
+    onSubmit,
+    setValue,
+    touchedFields,
+    formState,
+  };
 };
 export default useSignUp;

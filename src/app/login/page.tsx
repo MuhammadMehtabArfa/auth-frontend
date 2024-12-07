@@ -77,8 +77,13 @@ const Login = () => {
                 </Anchor>
               </Link>
             </Group>
-            <Button type="submit" fullWidth mt="xl">
-              Login
+            <Button
+              type="submit"
+              fullWidth
+              mt="xl"
+              disabled={loginMutation?.isPending}
+            >
+              {loginMutation?.isPending ? "...Loading" : "Login"}
             </Button>
           </form>
         </Paper>

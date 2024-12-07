@@ -12,6 +12,8 @@ import localFont from "next/font/local";
 import Head from "next/head";
 import "./globals.css";
 import { breakpoints, colors } from "./theme";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // const queryClient = new  QueryClient();
 
 const geistSans = localFont({
@@ -46,12 +48,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" >
+    <html lang="en">
       <Head>
         <ColorSchemeScript />
       </Head>
       <body className="antialiased">
-        <MantineProvider theme={theme}><QueryProvider>{children}</QueryProvider></MantineProvider>
+        <MantineProvider theme={theme}>
+          <ToastContainer />
+          <QueryProvider>{children}</QueryProvider>
+        </MantineProvider>
       </body>
     </html>
   );
