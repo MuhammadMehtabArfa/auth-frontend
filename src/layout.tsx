@@ -1,6 +1,8 @@
 import QueryProvider from "./queryProvidor";
 import type { Metadata } from "next";
-// import {  QueryClient,QueryClientProvider} from "@tanstack/react-query"
+import { Store } from "./redux/store";
+import { Provider } from "react-redux";
+import { Providers } from "./redux/provider";
 import {
   ColorSchemeScript,
   createTheme,
@@ -55,7 +57,12 @@ export default function RootLayout({
       <body className="antialiased">
         <MantineProvider theme={theme}>
           <ToastContainer />
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            {" "}
+            <Provider store={Store}>
+              <Providers>{children}</Providers>
+            </Provider>
+          </QueryProvider>
         </MantineProvider>
       </body>
     </html>
