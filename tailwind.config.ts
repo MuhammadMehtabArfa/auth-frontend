@@ -1,4 +1,4 @@
-import { breakpoints, colors } from "./src/theme";
+import { breakpoints, colors } from "./src/app/theme";
 import tailwindPresetMantine from "tailwind-preset-mantine";
 import type { Config } from "tailwindcss";
 

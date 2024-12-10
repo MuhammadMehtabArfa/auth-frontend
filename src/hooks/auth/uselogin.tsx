@@ -7,10 +7,13 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setAuth } from "@/redux/Slices/AuthSlice";
 // import useAccount from "./useAccount";
 
 const uselogin = () => {
   const [loginMutationError, setLoginMutationError] = useState<any>(null);
+  const dispatch = useDispatch();
   const router = useRouter();
   // const { setLoggedIn } = useAccount();
 
@@ -58,6 +61,14 @@ const uselogin = () => {
         //     userDetails: data?.user,
         //     accessToken: data?.accessToken,
         // });
+        dispatch(
+          setAuth({
+            user: data?.data?.user,
+            accessToken: data?.data?.access_token,
+          }),
+        );
+
+        router.push("/main-page");
       }
     },
     onError: (error: any) => {
