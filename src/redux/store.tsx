@@ -4,7 +4,6 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import AuthReducer from "./Slices/AuthSlice";
-import entitiesReducer from "./Slices/StateSlice";
 
 // Persist configuration
 const persistConfig = {
@@ -15,7 +14,6 @@ const persistConfig = {
 // Combine reducers
 const rootReducer = combineReducers({
   auth: AuthReducer,
-  entities: entitiesReducer,
 });
 
 // Create a persisted reducer
