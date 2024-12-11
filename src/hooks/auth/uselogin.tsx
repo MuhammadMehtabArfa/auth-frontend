@@ -52,15 +52,7 @@ const uselogin = () => {
       toast.success(data?.data?.message);
       if (data?.data?.user?.isVerified === false) {
         router.push(`/verifyotp?email=${data?.data?.user?.email}`);
-        // setLoggedIn({
-        //              userDetails: data?.user,
-        //              accessToken: data?.accessToken, });
-      } else {
-        //is-veified user save the user and access token in redux persiste
-        // setLoggedIn({
-        //     userDetails: data?.user,
-        //     accessToken: data?.accessToken,
-        // });
+      } else { 
         dispatch(
           setAuth({
             user: data?.data?.user,

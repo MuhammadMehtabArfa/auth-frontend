@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-
+import WithAuth from "../../../utils/withAuth";
 import {
   Anchor,
   Button,
@@ -92,4 +92,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default WithAuth(Login);
